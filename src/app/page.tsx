@@ -1,3 +1,4 @@
+import Hero from "@/components/hero";
 import Product from "@/components/product";
 import { ProductType } from "@/interface";
 
@@ -7,7 +8,8 @@ export default async function Home() {
   console.log(products);
   
   return (
-    <main className="min-h-screen max-w-7xl mx-auto px-8 xl:px-0 mt-52">
+    <main className="min-h-screen max-w-7xl mx-auto px-8 xl:px-0 ">
+      <Hero/>
       <section className="flex flex-col space-y-12">
         <h1 className="text-5xl font-bold text-center ">
           SHOP DEALS

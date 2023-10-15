@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
+import ReactStars from 'react-stars'
 
 
 
@@ -65,7 +66,7 @@ const ProductDetailPage = () => {
                                             </p>
                                             {product?.rating.rate && (
                                                 <div className="flex items-center ml-2 mr-6">
-                                                    {Array.from({
+                                                    {/* {Array.from({
                                                         length: Math.floor(product.rating.rate),
                                                     },
                                                         (_, i) => (
@@ -84,7 +85,11 @@ const ProductDetailPage = () => {
                                                                 className='h-4 w-4 text-yellow-500'
                                                             />
                                                         )
-                                                    )}
+                                                    )} */}
+                                                    <ReactStars 
+                                                    value={product.rating.rate}
+                                                    edit={false}
+                                                    />
                                                 </div>
                                             )}
                                             <p className="text-blue-600 hover:underline cursor-pointer text-xs">

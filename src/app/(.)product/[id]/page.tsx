@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
 import ReactStars from 'react-stars'
+import { toast } from "react-toastify";
 
 
 
@@ -19,7 +20,31 @@ const ProductDetailPage = () => {
     const [isOpen, setIsOpen] = useState(true)
     const router = useRouter()
 
+    const handleClick = () => {
+        const products: ProductType[] = JSON.parse(localStorage.getItem('carts') as string) || [];
+        const isExitsProduct = products.find(c=>c.id ===product?.id);
+        if( isExitsProduct){
+            const updatedData = products.map(c=>{
+                if(c.id === product?.id){
+                    return{
+                        ...c ,
+                        quantity: c.quantity + 1,
 
+                    };
+                    
+
+                }
+                return c;
+            });
+            localStorage.setItem('carts' , JSON.stringify(updatedData)) ;
+        } else{
+            const data = [...products , {...product, quantity: 1}];
+            localStorage.setItem('carts' , JSON.stringify(data)) ;
+
+        }  
+        toast("Product added to  your bag!!") 
+    
+    }
     useEffect(() => {
         async function getData() {
             setloading(true);
@@ -59,7 +84,7 @@ const ProductDetailPage = () => {
                                         </h4>
                                         <p className="font-medium text-sm">
                                             $ {product?.price}
-                                            </p>
+                                        </p>
                                         <div className="flex items-center text-sm my-4">
                                             <p>
                                                 {product?.rating.rate}
@@ -86,9 +111,9 @@ const ProductDetailPage = () => {
                                                             />
                                                         )
                                                     )} */}
-                                                    <ReactStars 
-                                                    value={product.rating.rate}
-                                                    edit={false}
+                                                    <ReactStars
+                                                        value={product.rating.rate}
+                                                        edit={false}
                                                     />
                                                 </div>
                                             )}
@@ -101,16 +126,16 @@ const ProductDetailPage = () => {
                                         </p>
                                     </div>
                                     <div className='space-y-3 text-sm'>
-										<button className='button ml-0 w-full bg-blue-600 text-white border-transparent hover:border-blue-600 hover:bg-transparent hover:text-black'>
-											Add to bag
-										</button>
-										<button
-											onClick={() => window.location.reload()}
-											className='button ml-0 w-full bg-transparent border-blue-600 hover:bg-blue-600 hover:text-white hover:border-transparent'
-										>
-											View full details
-										</button>
-									</div>
+                                        <button className='button ml-0 w-full bg-blue-600 text-white border-transparent hover:border-blue-600 hover:bg-transparent hover:text-black' onClick={handleClick}>
+                                            Add to bag
+                                        </button>
+                                        <button
+                                            onClick={() => window.location.reload()}
+                                            className='button ml-0 w-full bg-transparent border-blue-600 hover:bg-blue-600 hover:text-white hover:border-transparent'
+                                        >
+                                            View full details
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}

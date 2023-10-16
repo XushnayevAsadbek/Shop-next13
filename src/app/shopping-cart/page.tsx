@@ -189,7 +189,7 @@ const ShoppingCart = () => {
                   </h1>
                   <p className="text-slate-600 mt-5 lg:text-lg">The page you are looking for doesn't exist or <br />has been removed.</p>
 
-                  <Link href={'/product'}>
+                  <Link href={'/products'}>
                <button className="button bg-blue-600 text-white border-transparent mt-4 hover:border-blue-600 hover:bg-transparent hover:text-black ">
                     Product    
                 </button>
